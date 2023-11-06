@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+
+<!--
+
+  ▄▄                   
+▀████▀     █     ▀███▀         ██         ███                   
+  ▀██     ▄██     ▄█           ██          ██                   
+   ██▄   ▄███▄   ▄█   ▄█▀██▄ ██████ ▄██▀██ ███████▄ ▀███  ▀███  
+    ██▄  █▀ ██▄  █▀  ██   ██   ██  ██▀  ██ ██    ██   ██    ██  
+    ▀██ █▀  ▀██ █▀    ▄█████   ██  ██      ██    ██   ██    ██  
+     ▄██▄    ▄██▄    ██   ██   ██  ██▄    ▄██    ██   ██    ██  
+      ██      ██     ▀████▀██▄ ▀█████████▀████  ████▄ ▀████▀███▄
+                                                                
+                                                                
+   ▄▄                               ▄▄             
+ ▀███                   ▀███        ██             
+   ██                     ██                       
+   ██   ▄██▀██▄  ▄██▀██▄  ██  ▄██▀▀███ ▀████████▄  
+   ██  ██▀   ▀████▀   ▀██ ██ ▄█     ██   ██    ██  
+   ██  ██     ████     ██ ██▄██     ██   ██    ██  
+   ██  ██▄   ▄████▄   ▄██ ██ ▀██▄   ██   ██    ██  
+ ▄████▄ ▀█████▀  ▀█████▀▄████▄ ██▄▄████▄████  ████▄
+                                                   
+                                                   
+                               
+          ██   ▄█▀▀▀█▄ ▄█▀▀▀█▄ 
+          ██   ██▀  ▀█▄██▀  ▀█▄
+ ▄█▀██▄ ██████      ▄██     ▄██
+██   ██   ██     ████▀   ████▀ 
+ ▄█████   ██     ██      ██    
+██   ██   ██     ▄▄      ▄▄    
+▀████▀██▄ ▀████  ██      ██    
+                               
+-->
+
+<html>
+<head>
+  <title>Tic Tac Toe</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      border-bottom: 5px solid #0056b3;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 150px);
+      gap: 5px;
+      margin: 20px auto;
+      max-width: 480px;
+    }
+
+    .cell {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 150px;
+      height: 150px;
+      border: 3px solid #0056b3;
+      font-size: 72px;
+      cursor: pointer;
+      background-color: #fff;
+      color: #333;
+      transition: background-color 0.3s;
+    }
+
+    .cell:hover {
+      background-color: #f2f2f2;
+    }
+
+    .cell.bot {
+      cursor: default;
+    }
+
+    .message {
+      text-align: center;
+      font-size: 32px;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #0056b3;
+      font-family: Comic Sans MS, cursive;
+      text-shadow: 2px 2px 2px lightblue;
+    }
+
+    #restartButton {
+      display: block;
+      margin: 20px auto;
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #0056b3;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    #restartButton:hover {
+      background-color: #003d80;
+    }
+
+    #copyandpasteeiengescodewegenfaulheit{
+    padding-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 500px;
+    padding-right: 500px;
+    }
+
+    #button{
+      box-shadow: 10px 10px 5px lightblue;
+    }
+
+    #headerstyle{
+      font-family: 'Oswald', sans-serif;
+      font-size: 56px;
+      text-shadow: 4px 4px 2px gray;
+    }
+
+    #modalbuttons{
+      box-shadow: 3px 3px 2px green;
+    }
+  </style>
+  <script src="script.js"></script>
+</head>
+<body>
+  <header>
+    <h1 id="headerstyle">Tic Tac Toe</h1>
+  </header>
+  <div class="board" id="board">
+    <div class="cell" onclick="handleClick(0, 0)"></div>
+    <div class="cell" onclick="handleClick(0, 1)"></div>
+    <div class="cell" onclick="handleClick(0, 2)"></div>
+    <div class="cell" onclick="handleClick(1, 0)"></div>
+    <div class="cell" onclick="handleClick(1, 1)"></div>
+    <div class="cell" onclick="handleClick(1, 2)"></div>
+    <div class="cell" onclick="handleClick(2, 0)"></div>
+    <div class="cell" onclick="handleClick(2, 1)"></div>
+    <div class="cell" onclick="handleClick(2, 2)"></div>
+  </div>
+  <div class="message" id="message"></div>
+  <script src="funktiondisdasananas.js">
+  </script>
+
+<div class="btn-group btn-group-justified" id="copyandpasteeiengescodewegenfaulheit">
+  <button class="btn btn-primary btn-lg" id="button" data-bs-toggle="modal" data-bs-target="#myModal">return</button>
+  <button class="btn btn-warning btn-lg" id="button" onclick="location.reload()">Restart</button>
+</div>
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">Are you sure you want to leave?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="history.back()">Yes</button>
+        <button type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="location.reload()">No</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>

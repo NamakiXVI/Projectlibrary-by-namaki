@@ -3,41 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>We Chat</title>
+    <title>Ordner herunterladen</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
         }
-        #chat-container {
-            max-width: 400px;
-            margin: 20px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        #chat-box {
-            overflow-y: auto;
-            max-height: 300px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-        }
-        #user-input {
-            margin-top: 10px;
-            display: flex;
-        }
-        #user-message {
-            flex-grow: 1;
-            padding: 5px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        #send-btn {
-            margin-left: 10px;
-            padding: 5px 10px;
+        button {
+            padding: 10px 20px;
             background-color: #4CAF50;
             color: #fff;
             border: none;
@@ -47,55 +21,22 @@
     </style>
 </head>
 <body>
-    <div id="chat-container">
-        <div id="chat-box"></div>
-        <div id="user-input">
-            <input type="text" id="user-message" placeholder="Type your message...">
-            <button id="send-btn" onclick="sendMessage()">Send</button>
-        </div>
-    </div>
+    <h1>Ordner herunterladen</h1>
+    <p>Klicke auf den folgenden Button, um den gesamten Ordner herunterzuladen:</p>
+    <button onclick="downloadFolder()">Ordner herunterladen</button>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script>
-        function sendMessage() {
-            var userMessage = document.getElementById('user-message').value;
-            if (userMessage.trim() === '') return;
+        function downloadFolder() {
+            var zip = new JSZip();
 
-            appendMessage('You: ' + userMessage);
+            zip.file("ordner/Datei1.txt", "Inhalt von Datei 1");
+            zip.file("ordner/Datei2.txt", "Inhalt von Datei 2");
 
-            fetchBotResponse(userMessage);
-            
-            document.getElementById('user-message').value = '';
-        }
-
-        function fetchBotResponse(userMessage) {
-            var apiUrl = 'https://api.example.com/chatbot';
-
-            // Simpler Fetch-Aufruf
-            fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ message: userMessage }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                var botResponse = 'Bot: ' + data.message;
-                appendMessage(botResponse);
-            })
-            .catch(error => {
-                console.error('Error fetching bot response:', error);
-                appendMessage('Bot: Oops! Something went wrong.'); 
+            zip.generateAsync({type:"blob"}).then(function(content) {
+                saveAs(content, "ordner.zip");
             });
-        }
-
-        function appendMessage(message) {
-            var chatBox = document.getElementById('chat-box');
-            var messageElement = document.createElement('div');
-            messageElement.textContent = message;
-            chatBox.appendChild(messageElement);
-
-            chatBox.scrollTop = chatBox.scrollHeight;
         }
     </script>
 </body>
